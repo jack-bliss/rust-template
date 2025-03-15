@@ -1,0 +1,11 @@
+[tasks.demo]
+command = "cargo"
+args = ["run", "--bin", "demo"]
+
+[tasks.docs]
+command = "cargo"
+args = ["doc", "--no-deps", "--open"]
+
+[tasks.test]
+command = "cargo"
+args = ["test", "--all-features"]

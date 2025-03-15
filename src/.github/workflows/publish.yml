@@ -1,0 +1,49 @@
+on:
+  push:
+    tags:
+      - '*'
+
+name: Publish
+
+jobs:
+  check-version:
+    name: Check version
+    description: Ensures that the pushed tag and the cargo.toml version are the same.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read Cargo version
+        id: cargo_version
+        uses: SebRollen/toml-action@v1.2.0
+        with:
+          file: "cargo.toml"
+          field: "package.version"
+      - name: Compare tag version
+        if: ${{ steps.cargo_version.outputs.value != github.ref_name }}
+        run: exit 1
+
+  test:
+    name: Test (ubuntu)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: --debug cargo-make
+      - uses: actions-rs/cargo@v1
+        with:
+          command: make
+          args: test
+
+  crates_io_publish:
+    name: Publish (crates.io)
+    needs:
+      - check-version
+      - test
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: "echo 'Here is where I would publish!'"

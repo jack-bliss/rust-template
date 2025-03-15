@@ -1,0 +1,11 @@
+[package]
+name = "rust-template"
+version = "0.1.0"
+edition = "2021"
+default-run = "rust-template"
+
+[lib]
+
+[dependencies]
+cargo-make = "0.37.24"
+tokio-test = "0.4.4"
