@@ -8,7 +8,6 @@ name: Publish
 jobs:
   check-version:
     name: Check version
-    description: Ensures that the pushed tag and the cargo.toml version are the same.
     runs-on: ubuntu-latest
     steps:
       - name: Read Cargo version
