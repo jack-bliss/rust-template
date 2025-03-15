@@ -10,6 +10,7 @@ jobs:
     name: Check version
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Read Cargo version
         id: cargo_version
         uses: SebRollen/toml-action@v1.2.0
