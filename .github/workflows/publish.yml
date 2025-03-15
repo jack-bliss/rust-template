@@ -17,12 +17,17 @@ jobs:
         with:
           file: "Cargo.toml"
           field: "package.version"
+      - run: |
+          echo "Cargo version: ${{ steps.cargo_version.outputs.value }}"
+          echo "Tagged version: ${{ github.ref_name }}"
       - name: Compare tag version
         if: ${{ steps.cargo_version.outputs.value != github.ref_name }}
         run: exit 1
 
   test:
     name: Test (ubuntu)
+    needs:
+      - check-version
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -39,9 +44,7 @@ jobs:
   crates_io_publish:
     name: Publish (crates.io)
     needs:
-      - check-version
       - test
-
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
