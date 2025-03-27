@@ -1,4 +1,4 @@
-/// Sums sum numbers together.
+/// Sums some numbers together.
 /// ```
 /// # use rust_template::utils::sum;
 /// assert_eq!(sum(1, 2), 3);

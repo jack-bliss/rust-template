@@ -9,3 +9,5 @@ default-run = "rust-template"
 [dependencies]
 cargo-make = "0.37.24"
 tokio-test = "0.4.4"
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
